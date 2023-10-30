@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $datos = json_decode(file_get_contents('php://input'), true);
 
     $documento = $datos['num_documento'];
+    $estadoOrden = $datos['estado_orden'];
 
     //sentencia para listar los clientes
     $sentenciaSql = "
@@ -33,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         INNER JOIN cliente_tbl ON orden_servicio_tbl.fk_id_cliente = cliente_tbl.nit 
         INNER JOIN estado_tbl ON orden_servicio_tbl.fk_id_estado = estado_tbl.id_estado
         INNER JOIN usuario_tbl ON orden_servicio_tbl.fk_id_usuario = usuario_tbl.num_documento
-        WHERE orden_servicio_tbl.fk_id_usuario = '$documento'";
+        WHERE orden_servicio_tbl.fk_id_usuario = '$documento' AND estado_tbl.id_estado = '$estadoOrden'";
 
     $response = array();
 

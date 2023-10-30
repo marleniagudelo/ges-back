@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $idCliente = $datos['fk_id_cliente'];
     $descripcionNovedad = $datos['descripcion_novedad'];
     $idTecnico = $datos['fk_id_usuario'];
+    date_default_timezone_set('America/Bogota');
     $fecha_actual = date("Y-m-d H:i:s");
 
 
