@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $claveEncriptada = password_hash($clave,PASSWORD_BCRYPT);
 
         //Sentencia para guardar un nuevo usuario
-        $sentenciaSql = "INSERT INTO usuario_tbl(`num_documento`, `nombre_usuario`, `clave_usuario`, `fk_rol`, 'estado') 
+        $sentenciaSql = "INSERT INTO usuario_tbl(`num_documento`, `nombre_usuario`, `clave_usuario`, `fk_rol`, `estado`) 
         VALUES ('$documento','$nombreUsuario','$claveEncriptada','$fkRol',1)";
 
         $insert = $conexion->query($sentenciaSql);

@@ -13,24 +13,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $datos = json_decode(file_get_contents('php://input'), true);
 
     $documento = $datos['documento'];
-    $nombreUsuario = $datos['nombre_usuario'];
-    $fkRol = $datos['fk_rol'];
+    $estado = $datos['estado'];
 
 
     //Sentencia para editar un Usuario
     $sentenciaSql = "UPDATE `usuario_tbl` 
 	                    SET 
-                            `nombre_usuario`='$nombreUsuario',
-                            `fk_rol`='$fkRol'
+                            `estado`='$estado'
                         WHERE `num_documento`='$documento'";
 
     $insert = $conexion->query($sentenciaSql);
     if ($insert === true) {
-        $response['mensaje'] = "Usuario editado con exito";
         $response['estado'] = 200;
+        $response['mensaje'] = "Estado del usuario cambiado con exito";
     } else {
-        $response['mensaje'] = "Error al editar el usuario" . $conexion->error;
         $response['estado'] = 500;
+        $response['mensaje'] = "Error al cambiar el estado del usuario" . $conexion->error;
     }
 
     $conexion->close();
