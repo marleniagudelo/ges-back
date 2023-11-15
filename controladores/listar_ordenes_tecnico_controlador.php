@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             orden_servicio_tbl.descripcion_novedad,
             orden_servicio_tbl.fecha_creacion,
             orden_servicio_tbl.fecha_Inicio,
+            orden_servicio_tbl.fecha_final,
             orden_servicio_tbl.fecha_creacion,
             orden_servicio_tbl.observaciones_finales,
             cliente_tbl.nit,

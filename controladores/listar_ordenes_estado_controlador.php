@@ -1,14 +1,19 @@
 <?php
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     header('Content-Type: application/json');
     header("Access-Control-Allow-Origin: *");
-    header('Access-Control-Allow-Methods: GET');
+    header('Access-Control-Allow-Methods: POST');
     header('Access-Control-Allow-Headers: Content-Type');
 
     // se trae el archivo de la conexion a la base de datos
     include './../conexion/conexion_db.php';
+
+    // se decodifica el archivo JSON y se guarda en $datos
+    $datos = json_decode(file_get_contents('php://input'), true);
+
+    $estado = $datos['estado'];
 
     //sentencia para listar los clientes
     $sentenciaSql = "
@@ -17,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             orden_servicio_tbl.descripcion_novedad,
             orden_servicio_tbl.fecha_creacion,
             orden_servicio_tbl.fecha_Inicio,
+            orden_servicio_tbl.fecha_final,
             orden_servicio_tbl.fecha_creacion,
             orden_servicio_tbl.observaciones_finales,
             cliente_tbl.nit,
@@ -29,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         INNER JOIN cliente_tbl ON orden_servicio_tbl.fk_id_cliente = cliente_tbl.nit 
         INNER JOIN estado_tbl ON orden_servicio_tbl.fk_id_estado = estado_tbl.id_estado
         INNER JOIN usuario_tbl ON orden_servicio_tbl.fk_id_usuario = usuario_tbl.num_documento
-        WHERE orden_servicio_tbl.fk_id_estado = 1";
+        WHERE orden_servicio_tbl.fk_id_estado = '$estado'";
 
     $response = array();
 
