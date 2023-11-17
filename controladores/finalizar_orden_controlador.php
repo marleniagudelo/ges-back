@@ -12,6 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 //Datos recibido en json
     $idOrden = $datos['id_orden'];
+    date_default_timezone_set('America/Bogota');
+    $fechaFinal = date("Y-m-d H:i:s");
+    $observacionFinal = $datos['observacion_final'];
 
 
     $sentenciaSql = "SELECT * FROM orden_servicio_tbl WHERE id_orden = '$idOrden'";
@@ -22,21 +25,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($resultado->num_rows > 0) {
 
-        $sql = "UPDATE orden_servicio_tbl 
-                    SET orden_servicio_tbl.estado_canc = 0
+        $sql = "UPDATE orden_servicio_tbl
+                    SET orden_servicio_tbl.fecha_final = '$fechaFinal',
+                        orden_servicio_tbl.fk_id_estado = 3,
+                        orden_servicio_tbl.observaciones_finales = '$observacionFinal'
                     WHERE orden_servicio_tbl.id_orden = '$idOrden'";
 
         if ($conexion->query($sql) === true) {
             $response['estado'] = 200;
-            $response['mensaje'] = "Orden cancelada correctamente!";
+            $response['mensaje'] = "Orden finalizada correctamente!";
         } else {
             $response['estado'] = 500;
-            $response['mensaje'] = "Error al cancelar la orden: " . $conexion->error;;
+            $response['mensaje'] = "Error al finalizar la orden: " . $conexion->error;;
         }
 
     } else {
         $response['estado'] = 500;
-        $response['mensaje'] = "No hay ordenes para cancelar!";
+        $response['mensaje'] = "No hay ordenes para finalizar!";
     }
 
 

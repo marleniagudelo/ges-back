@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         INNER JOIN cliente_tbl ON orden_servicio_tbl.fk_id_cliente = cliente_tbl.nit 
         INNER JOIN estado_tbl ON orden_servicio_tbl.fk_id_estado = estado_tbl.id_estado
         INNER JOIN usuario_tbl ON orden_servicio_tbl.fk_id_usuario = usuario_tbl.num_documento
-        WHERE orden_servicio_tbl.fk_id_usuario = '$documento' AND estado_tbl.id_estado = '$estadoOrden'";
+        WHERE orden_servicio_tbl.fk_id_usuario = '$documento' AND estado_tbl.id_estado = '$estadoOrden' and orden_servicio_tbl.estado_canc = 1";
 
     $response = array();
 

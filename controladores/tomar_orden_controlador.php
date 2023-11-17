@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $idOrden = $datos['id_orden'];
     date_default_timezone_set('America/Bogota');
-    $fechaActual = date("Y-m-d");
+    $fechaActual = date("Y-m-d H:i:s");
 
     //Sentencia para editar una orden
     $sentenciaSql = "UPDATE orden_servicio_tbl 

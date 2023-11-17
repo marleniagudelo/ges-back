@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         `fecha_Inicio`,
         `fecha_final`,
         `observaciones_finales`,
+         estado_canc,
         `fk_id_cliente`,
          `fk_id_usuario`,
          `fk_id_estado`)
@@ -37,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             '',
             '',
             '',
+            1,
             '$idCliente',
             '$idTecnico',
             '1')";
